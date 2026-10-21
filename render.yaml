@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: lily-telegram-bridge
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: TELEGRAM_API_ID
+        sync: false
+      - key: TELEGRAM_API_HASH
+        sync: false
+      - key: TELEGRAM_SESSION
+        sync: false
+      - key: N8N_WEBHOOK_URL
+        sync: false
+      - key: N8N_SHARED_SECRET
+        sync: false
+      - key: N8N_SECRET_HEADER
+        value: X-Lily-Secret
